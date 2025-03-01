@@ -1,0 +1,94 @@
+<!--The 'step_code' value from the .js file should be used-->
+<li id="step_codes"
+    data-bind="fadeVisible: true"
+    class="ps-infm">
+    <div class="step-title cust"
+         data-bind="i18n: 'Flight Information'"
+         data-role="title"></div>
+    <div id="checkout-step-title"
+         class="step-content"
+         data-role="content">
+
+        <form data-bind="submit: saveFlightDetails"
+              novalidate="novalidate">
+            <!-- Flight Information  -->
+            <fieldset>
+
+                <div class="field _required">
+                    <label class="label"
+                           for="flight_datetime">
+                        <span data-bind="i18n: 'Flight Date and Time'"></span>
+                    </label>
+                    <div class="control">
+                        <input type="datetime-local"
+                               name="flight_datetime"
+                               id="flight_datetime"
+                               class="input-text"
+                               required="required"
+                               data-bind="value: flightDetails.flightDateTime, attr: {min: minDateTime}, event: {change: validateDateTime,blur: isFarmComlete}"
+                               data-validate="{required:true}" />
+                    </div>
+                </div>
+
+                <div class="field _required">
+                    <label class="label"
+                           for="flight_number">
+                        <span data-bind="i18n: 'Flight Number'"></span>
+                    </label>
+                    <div class="control">
+                        <input type="text"
+                               name="flight_number"
+                               required="required"
+                               data-bind="value: flightDetails.flightNumber, event: {blur: isFarmComlete}"
+                               data-validate="{required:true}"
+                               class="input-text required-entry" />
+                    </div>
+                </div>
+
+                <div class="field _required">
+                    <label class="label"
+                           for="nationality">
+                        <span data-bind="i18n: 'Source'"></span>
+                    </label>
+                    <div class="control">
+                        <select name="nationality"
+                                required="required"
+                                data-bind="
+                    options: nationalityOptions,
+                    optionsText: 'label',
+                    optionsValue: 'value',
+                    value: flightDetails.nationality,
+                    afterRender:loadNationalityOptions,
+                    event: {blur: isFarmComlete}
+                    "
+                                class="select required-entry">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field _required">
+                    <label class="label"
+                           for="transit">
+                        <span data-bind="i18n: 'Are You Transit Passanger ?'"></span>
+                    </label>
+                    <div class="control">
+                        <span><input type="radio"
+                                   id="option1"
+                                   name="transit"
+                                   value="Yes"
+                                   data-bind="event: { change: onChangeTransit, blur: isFarmComlete }">Yes</span>
+                        <span><input type="radio"
+                                   id="option2"
+                                   name="transit"
+                                   value="No"
+                                   checked
+                                   data-bind="event: { change: onChangeTransit, blur: isFarmComlete }">No</span>
+                    </div>
+                </div>
+
+                <!-- </div> -->
+
+            </fieldset>
+        </form>
+    </div>
+</li>

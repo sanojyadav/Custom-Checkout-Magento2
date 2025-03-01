@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="sales_order" resource="sales">
+        <column xsi:type="datetime" name="flight_date_time" nullable="true" comment="Flight Date and Time"/>
+        <column xsi:type="text" name="flight_source" nullable="true" length="255" comment="flight source"/>
+	<column xsi:type="text" name="flight_destination" nullable="true" length="255" comment="Flight Destination"/>
+        <column xsi:type="text" name="is_transit" nullable="true" length="255" comment="Is Transit"/>
+	<column xsi:type="text" name="flight_no" nullable="true" length="255" comment="Flight No" />
+	<column xsi:type="text" name="passports" nullable="true"  comment="Passports" />
+	<column xsi:type="text" name="no_of_passports" nullable="true" length="255" comment="No of passports" />
+    </table>
+</schema>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="delhi_duty_free_passports" resource="default" engine="innodb" comment="Passport Details Table">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="true" comment="Order ID"/>
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="true" comment="Customer ID"/>
+        <column xsi:type="varchar" name="full_name" nullable="false" length="255" comment="Full Name"/>
+        <column xsi:type="varchar" name="passport_number" nullable="false" length="50" comment="Passport Number"/>
+        <column xsi:type="varchar" name="nationality" nullable="false" length="100" comment="Nationality"/>
+        <column xsi:type="date" name="date_of_birth" nullable="false" comment="Date of Birth"/>
+        <column xsi:type="date" name="passport_expiry" nullable="false" comment="Passport Expiry Date"/>
+        <column xsi:type="datetime" name="flight_datetime" nullable="false" comment="Flight Date Time"/>
+        <column xsi:type="boolean" name="is_primary" nullable="false" default="0" comment="Is Primary Passport Holder"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="DELHI_PASSPORT_ORDER_ID_SALES_ORDER_ENTITY_ID" 
+                table="delhi_duty_free_passports" column="order_id" 
+                referenceTable="sales_order" referenceColumn="entity_id" 
+                onDelete="CASCADE"/>
+    </table>
+</schema>
