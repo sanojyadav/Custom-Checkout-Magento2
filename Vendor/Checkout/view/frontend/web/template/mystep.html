@@ -1,0 +1,217 @@
+<!--The 'step_code' value from the .js file should be used-->
+<li id="step_code"
+    data-bind="fadeVisible: true"
+    class="ps-infm">
+    <div class="step-title cust"
+         data-bind="i18n: 'Passport Information'"
+         data-role="title"></div>
+    <div id="checkout-step-title"
+         class="step-content"
+         data-role="content">
+
+        <form data-bind="submit: savePassportDetails"
+              novalidate="novalidate">
+
+            <!-- Primary Passport Holder -->
+            <fieldset>
+                <div class="primary-passport fieldset">
+                    <h3 data-bind="i18n: 'Primary Passport Holder'"></h3>
+                    <div class="field _required">
+                        <label class="label"
+                               for="full_name">
+                            <span data-bind="i18n: 'Full Name (as on passport)'"></span>
+                        </label>
+                        <div class="control">
+                            <input type="text"
+                                   name="full_name"
+                                   required="required"
+                                   data-customfield="customck"
+                                   data-bind="value: primaryPassport.fullName"
+                                   data-validate="{required:true}"
+                                   class="input-text required-entry" />
+                        </div>
+                    </div>
+
+                    <div class="field _required">
+                        <label class="label"
+                               for="passport_number">
+                            <span data-bind="i18n: 'Passport Number'"></span>
+                        </label>
+                        <div class="control">
+                            <input type="text"
+                                   name="passport_number"
+                                   required="required"
+                                   data-customfield="customck"
+                                   data-bind="value: primaryPassport.passportNumber"
+                                   data-validate="{required:true}"
+                                   class="input-text required-entry" />
+                        </div>
+                    </div>
+
+                    <div class="field _required">
+                        <label class="label"
+                               for="nationality">
+                            <span data-bind="i18n: 'Nationality'"></span>
+                        </label>
+                        <div class="control">
+                            <select name="nationality"
+                                    required="required"
+                                    data-customfield="customck"
+                                    data-bind="options: nationalityOptions,
+                                        optionsText: 'label',
+                                        optionsValue: 'value',
+                                        value: primaryPassport.nationality,
+                                        afterRender:loadNationalityOptions
+                                        "
+                                    class="select required-entry">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field _required">
+                        <label class="label"
+                               for="passport_expiry">
+                            <span data-bind="i18n: 'Passport Expiry Date'"></span>
+                        </label>
+                        <div class="control">
+                            <input type="date"
+                                   name="passport_expiry"
+                                   required="required"
+                                   data-customfield="customck"
+                                   data-bind="value: primaryPassport.passportExpiry,attr: {min: minDateTime}"
+                                   data-validate="{required:true}"
+                                   class="input-text required-entry" />
+                        </div>
+                    </div>
+
+
+
+                    <div class="field _required">
+                        <label class="label"
+                               for="date_of_birth">
+                            <span data-bind="i18n: 'Date of Birth'"></span>
+                        </label>
+                        <div class="control">
+                            <input type="date"
+                                   name="date_of_birth"
+                                   required="required"
+                                   data-customfield="customck"
+                                   data-bind="value: primaryPassport.dateOfBirth,attr: {max: minDOB},event: {change: validateDateOfBirth}"
+                                   data-validate="{required:true}"
+                                   class="input-text required-entry" />
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <h3 style="float: left;">Additional Passport Holders (Optional):</h3>
+                <!-- Additional Passport Holders -->
+                <div class="additional-passports"
+                     style="float: left;width: 100%;"
+                     data-bind="foreach: additionalPassports">
+                    <div class="passport-holder">
+                        <span style="font-weight: bold;float: inline-start;font-size: 20px;"
+                              data-bind="text: $index() + 1 + ')&nbsp;'"></span>
+                        <h4 data-bind="i18n: 'Additional Passport Holder'"></h4>
+                        <button type="button"
+                                class="action "
+                                data-bind="click: $parent.removePassportHolder">
+                            <span data-bind="i18n: 'Remove'"></span>
+                        </button>
+                        <!-- Similar fields as primary passport holder including flight date time -->
+                        <div class="field _required">
+                            <label class="label"
+                                   for="full_name">
+                                <span data-bind="i18n: 'Full Name (as on passport)'"></span>
+                            </label>
+                            <div class="control">
+                                <input type="text"
+                                       name="full_name"
+                                       data-customfield="customck"
+                                       data-bind="value: fullName"
+                                       data-validate="{required:true}"
+                                       class="input-text required-entry" />
+                            </div>
+                        </div>
+
+                        <div class="field _required">
+                            <label class="label"
+                                   for="passport_number">
+                                <span data-bind="i18n: 'Passport Number'"></span>
+                            </label>
+                            <div class="control">
+                                <input type="text"
+                                       name="passport_number"
+                                       data-customfield="customck"
+                                       data-bind="value: passportNumber"
+                                       data-validate="{required:true}"
+                                       class="input-text required-entry" />
+                            </div>
+                        </div>
+                        <div class="field _required">
+                            <label class="label"
+                                   for="nationality">
+                                <span data-bind="i18n: 'Nationality'"></span>
+                            </label>
+                            <div class="control">
+
+                                <select name="nationality"
+                                        required="required"
+                                        data-customfield="customck"
+                                        data-validate="{required:true}"
+                                        data-bind="options: $parent.nationalityOptions, optionsText: 'label', optionsValue: 'value', value: nationality"
+                                        class="select required-entry"></select>
+
+
+
+                            </div>
+                        </div>
+                        <div class="field _required">
+                            <label class="label"
+                                   for="date_of_birth">
+                                <span data-bind="i18n: 'Date of Birth'"></span>
+                            </label>
+                            <div class="control">
+                                <input type="date"
+                                       name="date_of_birth"
+                                       data-customfield="customck"
+                                       data-validate="{required:true}"
+                                       data-bind="value: dateOfBirth,attr: {max: $parent.minDOB}"
+                                       class="input-text required-entry" />
+                            </div>
+                        </div>
+
+                        <div class="field _required">
+                            <label class="label"
+                                   for="passport_expiry">
+                                <span data-bind="i18n: 'Passport Expiry Date'"></span>
+                            </label>
+                            <div class="control">
+                                <input type="date"
+                                       name="passport_expiry"
+                                       data-customfield="customck"
+                                       data-validate="{required:true}"
+                                       data-bind="value: passportExpiry,attr: {min: $parent.minDateTime}"
+                                       class="input-text required-entry" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- // data-bind="click: savePassportDetails" -->
+                <!-- <button type="submit" 
+                  class="action">
+              <span data-bind="i18n: 'Save'"></span>
+          </button> -->
+                <button type="button"
+                        class="action"
+                        data-bind="click: addPassportHolder">
+                    <span data-bind="i18n: 'Add Passenger/Co Traveler'"></span>
+                </button>
+            </fieldset>
+        </form>
+    </div>
+</li>
